@@ -14,7 +14,7 @@ class _AdvanceExampleState extends State<AdvanceExample> {
   String _selectedSuggestion = '';
 
   final GlobalKey<DropdownSuggestionsFormFieldState> _dropDownSuggestionKey =
-      GlobalKey<DropdownSuggestionsFormFieldState>();
+  GlobalKey<DropdownSuggestionsFormFieldState>();
 
   @override
   Widget build(BuildContext context) {
@@ -80,7 +80,9 @@ class _AdvanceExampleState extends State<AdvanceExample> {
           child: Padding(
             padding: EdgeInsets.symmetric(vertical: 10.0),
             child: Text(
-              'SELECTED SUGGESTION: ${_selectedSuggestion != null ? _selectedSuggestion : ''}',
+              'SELECTED SUGGESTION: ${_selectedSuggestion != null
+                  ? _selectedSuggestion
+                  : ''}',
               style: TextStyle(fontSize: 20.0),
             ),
           ),

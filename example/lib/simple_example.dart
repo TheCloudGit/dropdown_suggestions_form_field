@@ -1,7 +1,6 @@
 import 'package:dropdown_suggestions_form_field/dropdown_suggestions_form_field.dart';
 import 'package:flutter/material.dart';
 
-
 class SimpleExample extends StatefulWidget {
   final List<String> suggestions;
 
@@ -21,7 +20,7 @@ class _SimpleExampleState extends State<SimpleExample> {
         DropdownSuggestionsFormField<String>(
           decoration: InputDecoration(
               hintText: 'Start typing', labelText: 'Simple suggestion'),
-//          items: widget.suggestions,
+          items: widget.suggestions,
           onSelected: (String suggestion) => setState(() {
             _selectedSuggestion = suggestion;
           }),
