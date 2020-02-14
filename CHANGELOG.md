@@ -1,3 +1,7 @@
+## [1.0.2] - 2020/02/14
+
+* Example tab modified
+
 ## [1.0.1] - 2020/02/14
 
 * Code formatted.
