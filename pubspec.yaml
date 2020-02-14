@@ -1,12 +1,8 @@
 name: dropdown_suggestions_form_field
-
 description: The dropdown suggestions form field widget provides a list of suggestions while typing into a text form field
-
-version: 0.0.1
+version: 1.0.0
 author: Luciano Sebastian Lopez <thecloudcomar@gmail.com>
-homepage: https://github.com/TheCloudGit/
-
-
+homepage: https://thecloudgit.github.io/dropdown_suggestions_form_field/
 
 environment:
   sdk: ">=2.1.0 <3.0.0"

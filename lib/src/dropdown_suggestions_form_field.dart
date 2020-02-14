@@ -427,7 +427,7 @@ class DropdownSuggestionsFormFieldState<T>
     T suggestion = snapshot.data.elementAt(index);
     return ListTile(
       onTap: () => onSelect(suggestion),
-      title: Text('${suggestion}'),
+      title: Text('$suggestion'),
     );
   }
 
