@@ -46,6 +46,9 @@ class DropdownSuggestionsFormField<T> extends StatefulWidget {
   /// Shape border for styling the card inside the overlay
   final ShapeBorder cardShape;
 
+  /// TextController passed to the text form field
+  final TextEditingController controller;
+
   /// cursorWidth parameter passed to the text form field
   final double cursorWidth;
 
@@ -202,6 +205,7 @@ class DropdownSuggestionsFormField<T> extends StatefulWidget {
     this.cardBorderOnForeground: true,
     this.cardElevation: 1.0,
     this.cardShape,
+    this.controller,
     this.cursorWidth: 2.0,
     this.cursorColor,
     this.cursorRadius,
@@ -288,7 +292,8 @@ class DropdownSuggestionsFormFieldState<T>
     super.initState();
 
     /// Initialize the text editing controller with a initial value.
-    controller = TextEditingController(
+    controller = widget.controller != null ? widget.controller :
+    TextEditingController(
         text: widget.initialValue != null ? widget.initialValue : '');
     _layerLink = LayerLink();
     _onChangedDebounce =
