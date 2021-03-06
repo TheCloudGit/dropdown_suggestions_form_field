@@ -91,6 +91,8 @@ class DropdownSuggestionsFormField<T> extends StatefulWidget {
   /// List of items that will be filtered.
   final List<T> items;
 
+  final TextStyle itemStyle;
+
   /// keyboardAppearance parameter passed to the text form field
   final Brightness keyboardAppearance;
 
@@ -219,6 +221,7 @@ class DropdownSuggestionsFormField<T> extends StatefulWidget {
     this.inputFormatters,
     this.itemBuilder,
     this.items,
+    this.itemStyle,
     this.keyboardAppearance,
     this.keyboardType,
     this.maxLength,
@@ -292,9 +295,10 @@ class DropdownSuggestionsFormFieldState<T>
     super.initState();
 
     /// Initialize the text editing controller with a initial value.
-    controller = widget.controller != null ? widget.controller :
-    TextEditingController(
-        text: widget.initialValue != null ? widget.initialValue : '');
+    controller = widget.controller != null
+        ? widget.controller
+        : TextEditingController(
+            text: widget.initialValue != null ? widget.initialValue : '');
     _layerLink = LayerLink();
     _onChangedDebounce =
         Debounce(milliseconds: widget.onChangedDebounceDuration);
@@ -432,7 +436,7 @@ class DropdownSuggestionsFormFieldState<T>
     T suggestion = snapshot.data.elementAt(index);
     return ListTile(
       onTap: () => onSelect(suggestion),
-      title: Text('$suggestion'),
+      title: Text('$suggestion', style: widget.itemStyle),
     );
   }
 
