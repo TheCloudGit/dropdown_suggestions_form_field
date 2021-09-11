@@ -2,9 +2,9 @@ import 'package:dropdown_suggestions_form_field/dropdown_suggestions_form_field.
 import 'package:flutter/material.dart';
 
 class AdvanceExample extends StatefulWidget {
-  List<String> suggestions;
+  final List<String> suggestions;
 
-  AdvanceExample({this.suggestions});
+  AdvanceExample({@required this.suggestions});
 
   @override
   _AdvanceExampleState createState() => _AdvanceExampleState();
