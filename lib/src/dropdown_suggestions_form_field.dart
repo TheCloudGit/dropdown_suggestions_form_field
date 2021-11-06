@@ -28,8 +28,8 @@ class DropdownSuggestionsFormField<T> extends StatefulWidget {
   /// autocorrect parameter passed to the text form field
   final bool autocorrect;
 
-  /// autovalidate parameter passed to the text form field
-  final bool autovalidate;
+  /// autovalidateMode parameter passed to the text form field
+  final AutovalidateMode autovalidateMode;
 
   /// buildCounter parameter passed to the text form field
   final InputCounterWidgetBuilder buildCounter;
@@ -45,6 +45,9 @@ class DropdownSuggestionsFormField<T> extends StatefulWidget {
 
   /// Shape border for styling the card inside the overlay
   final ShapeBorder cardShape;
+
+  /// TextController passed to the text form field
+  final TextEditingController controller;
 
   /// cursorWidth parameter passed to the text form field
   final double cursorWidth;
@@ -88,6 +91,8 @@ class DropdownSuggestionsFormField<T> extends StatefulWidget {
   /// List of items that will be filtered.
   final List<T> items;
 
+  final TextStyle itemStyle;
+
   /// keyboardAppearance parameter passed to the text form field
   final Brightness keyboardAppearance;
 
@@ -97,8 +102,8 @@ class DropdownSuggestionsFormField<T> extends StatefulWidget {
   /// maxLength parameter passed to the text form field
   final int maxLength;
 
-  /// maxLengthEnforced parameter passed to the text form field
-  final bool maxLengthEnforced;
+  /// maxLengthEnforcement parameter passed to the text form field
+  final MaxLengthEnforcement maxLengthEnforcement;
 
   /// maxLines parameter passed to the text form field
   final int maxLines;
@@ -196,12 +201,13 @@ class DropdownSuggestionsFormField<T> extends StatefulWidget {
   DropdownSuggestionsFormField({
     key,
     this.autocorrect: true,
-    this.autovalidate: false,
+    this.autovalidateMode,
     this.buildCounter,
     this.cardColor: Colors.white,
     this.cardBorderOnForeground: true,
     this.cardElevation: 1.0,
     this.cardShape,
+    this.controller,
     this.cursorWidth: 2.0,
     this.cursorColor,
     this.cursorRadius,
@@ -215,10 +221,11 @@ class DropdownSuggestionsFormField<T> extends StatefulWidget {
     this.inputFormatters,
     this.itemBuilder,
     this.items,
+    this.itemStyle,
     this.keyboardAppearance,
     this.keyboardType,
     this.maxLength,
-    this.maxLengthEnforced: true,
+    this.maxLengthEnforcement,
     this.maxLines: 1,
     this.minLines,
     this.onChangedDebounceDuration: 200,
@@ -288,8 +295,10 @@ class DropdownSuggestionsFormFieldState<T>
     super.initState();
 
     /// Initialize the text editing controller with a initial value.
-    controller = TextEditingController(
-        text: widget.initialValue != null ? widget.initialValue : '');
+    controller = widget.controller != null
+        ? widget.controller
+        : TextEditingController(
+            text: widget.initialValue != null ? widget.initialValue : '');
     _layerLink = LayerLink();
     _onChangedDebounce =
         Debounce(milliseconds: widget.onChangedDebounceDuration);
@@ -427,7 +436,7 @@ class DropdownSuggestionsFormFieldState<T>
     T suggestion = snapshot.data.elementAt(index);
     return ListTile(
       onTap: () => onSelect(suggestion),
-      title: Text('$suggestion'),
+      title: Text('$suggestion', style: widget.itemStyle),
     );
   }
 
@@ -490,7 +499,7 @@ class DropdownSuggestionsFormFieldState<T>
   TextFormField textFormField() {
     return TextFormField(
       autocorrect: widget.autocorrect,
-      autovalidate: widget.autovalidate,
+      autovalidateMode: widget.autovalidateMode,
       buildCounter: widget.buildCounter,
       controller: controller,
       cursorColor: widget.cursorColor,
@@ -506,7 +515,7 @@ class DropdownSuggestionsFormFieldState<T>
       keyboardAppearance: widget.keyboardAppearance,
       keyboardType: widget.keyboardType,
       maxLength: widget.maxLength,
-      maxLengthEnforced: widget.maxLengthEnforced,
+      maxLengthEnforcement: widget.maxLengthEnforcement,
       maxLines: widget.maxLines,
       minLines: widget.minLines,
       readOnly: widget.readOnly,
